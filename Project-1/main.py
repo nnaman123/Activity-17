@@ -1,22 +1,27 @@
 import random
-Playing = True
-number = str(random.randint(10, 20))
 
 print("Welcome to the Number Guessing Game!")
 print("I'm thinking of a number between 10 and 20.")
-print("You have to guess the number and i will tell you if you are right or wrong and i will tell you how many guesses you took to get the right number and also tell you if your guess is too high or too low.")
+print("I will tell you if your guess is too high or too low.")
+
+number = random.randint(10, 20)
 guesses = 0
 
-while Playing:
-    guess = input("Enter your guess: ")
+while True:
+    try:
+        guess = int(input("Enter your guess: "))
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        continue
+
     guesses += 1
+
     if guess == number:
-        print("Congratulations! You guessed the number in " + str(guesses) + " guesses.")
-        Playing = False
+        print(f"Congratulations! You guessed the number in {guesses} guesses.")
+        break
+    elif guess < number:
+        print("Wrong guess. Your guess is too low. Try again!")
     else:
-        print("Wrong guess. Try again!")
-        if guess < number:
-            print("Your guess is too low.")
-        else:
-            print("Your guess is too high.")
+        print("Wrong guess. Your guess is too high. Try again!")
+
 print("Thanks for playing!")
